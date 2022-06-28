@@ -1,7 +1,7 @@
-var server_url = "http://localhost/trackerbackend/index.php/api";
+var server_url = "http://localhost/trackerbackend/index.php/api"; // Backend API endpoint base url
 
-
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+// Event triggered when user open new tab
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {   
     
     // If empty url or undefined, ignore event
     if(tab.url === undefined || tab.url.indexOf("chrome://") >= 0 || !tab.url.indexOf("chrome-extension://") || tab.url == 'about:blank') 
@@ -56,7 +56,7 @@ chrome.tabs.onRemoved.addListener(function(tabId) {
       }).then(response => {console.log(response)});
 });
 
-chrome.runtime.onInstalled.addListener(function(details) {
+chrome.runtime.onInstalled.addListener(function(details) {  // install 
     console.log("On Installed Event");
     chrome.tabs.create({url:"html/download.html"});
 })

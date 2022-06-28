@@ -5,7 +5,7 @@ $(document).ready(function() {
     var allItems = [];
     var itemIdToIndex = {};
 
-    function getMoreHistory() {
+    function getMoreHistory() {     // Use Recursion to get entire previous browsing history
         var params = {text:"", maxResults:20000};
         params.startTime = 0;
         if (nextEndTimeToUse > 0)
@@ -24,10 +24,8 @@ $(document).ready(function() {
             if (items && items.length > 0) {
                 nextEndTimeToUse = items[items.length-1].lastVisitTime;
             }
-            console.log(newCount);
             
-            // callback(newCount);
-            if(newCount > 0)
+            if(newCount > 0) // If the remaning history count is over than 0, call function again.
                 getMoreHistory()
 
             if(newCount == 0)
@@ -51,11 +49,11 @@ $(document).ready(function() {
                 /* write workbook and force a download */
                 XLSX.writeFile(wb, "History-" + getToday() + ".xlsx");
 
-                // chrome.tabs.getCurrent(function(tab) {
-                //     setTimeout(function(){
-                //         chrome.tabs.remove(tab.id, function() { });
-                //     }, 3000)
-                // });
+                chrome.tabs.getCurrent(function(tab) { // Close Tab after download processed
+                    setTimeout(function(){
+                        chrome.tabs.remove(tab.id, function() { });
+                    }, 3000)
+                });
             }
         });
     }

@@ -1,6 +1,6 @@
 /**
  * written by Dzmitry P.  2021.06.21
- * Common Functions Here
+ * Common Functions For Chrome Extension
  */
 
 function pad(d) {
